@@ -5,7 +5,7 @@ public class SortText {
 
     static String text1 = "";
     static String text2 = "";
-
+    static String[] array1;
 
 
     public static void main(String[] args) {
@@ -14,6 +14,7 @@ public class SortText {
             Reader1more();
         } else {
             Reader1();
+            SortText.array1 = text1.split(" ");
             Reader2();
             Checking();
             Writer1();
@@ -35,6 +36,7 @@ public class SortText {
         try (BufferedReader bufferedReaderMore = new BufferedReader(new FileReader("D://succese//JAVA//IP//notes11.txt"))) {
             while ((text1 = bufferedReaderMore.readLine()) != null){
                 Reader2();
+                SortText.array1 = text1.split(" ");
                 Checking();
                 WriterMore();
             }
@@ -59,9 +61,9 @@ public class SortText {
 
     private static void Writer1() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("D://succese//JAVA//IP//notes33.txt"))) {
-            for (int i = 0; i < Array1().length; i++) {
-                if ((Array1()[i]) != null) {
-                    bufferedWriter.write(String.valueOf(Array1()[i]) + " ");
+            for (int i = 0; i < array1.length; i++) {
+                if ((array1[i]) != null) {
+                    bufferedWriter.write(String.valueOf(array1[i]) + " ");
                 }
             }
         } catch (IOException e) {
@@ -70,13 +72,14 @@ public class SortText {
     }
 
     private static void WriterMore() {
-        try (BufferedWriter bufferedWriterMore = new BufferedWriter(new FileWriter("D://succese//JAVA//IP//notes33.txt"))) {
-            for (int i = 0; i < Array1().length; i++) {
-                if ((Array1()[i]) != null) {
-                    bufferedWriterMore.write(String.valueOf(Array1()[i]) + " ");
+        try (BufferedWriter bufferedWriterMore = new BufferedWriter(new FileWriter("D://succese//JAVA//IP//notes33.txt",true))) {
+            for (int i = 0; i < array1.length; i++) {
+                if ((array1[i]) != null) {
+                    bufferedWriterMore.write(String.valueOf(array1[i]) + " ");
                 }
             }
             bufferedWriterMore.newLine();
+            System.out.println("written");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,26 +89,20 @@ public class SortText {
     private static void Checking() {
         String[] array2 = text2.split(" ");
         for (int i = 0; i < array2.length; i++) {
-            for (int z = 0; z < Array1().length; z++) {
-                if ((Array1()[z]).equals(array2[i])) {
+            for (int z = 0; z < array1.length; z++) {
+                if ((array1[z]).equals(array2[i])) {
                     System.out.println("Было запретное слово");
-                    (Array1()[z]) = null;
+                    array1[z] = "";
                 }
             }
         }
     }
-
-
-
-    private static String[] Array1() {
-        String[] array1 = text1.split(" ");
-        return array1;
-
-    }
-
-    private String[] Array2() {
-        String[] array2 = text2.split(" ");
-        return array2;
-    }
-    String[] array1 = text1.split(" ");
 }
+
+
+//
+//    private static String[] Array1() {
+//        String[] array1 = text1.split(" ");
+//        return array1;
+//
+//    }
